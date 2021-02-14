@@ -15,14 +15,14 @@ Note: The app uses Handlebars as rendering engine and no separate framework for 
 
 ## API Documentation
 
-0. Endpoint to send a meme to the backend
-   HTTP Method - POST
-   Endpoint - /memes
-   Json Body contains these inputs - name, url, caption
-   The backend allocates a unique id for the meme and return it as a json response.
-
-1. Endpoint to fetch the latest 100 memes created from the backend
-   HTTP Method - GET
-   Endpoint - /memes
-   Error: If there are no memes available, an empty array shall be returned.
+0. Endpoint to send a meme to the backend  
+   HTTP Method - POST  
+   Endpoint - /memes  
+   Json Body contains these inputs - name, url, caption  
+   The backend allocates a unique id for the meme and return it as a json response.  
+  
+1. Endpoint to fetch the latest 100 memes created from the backend  
+   HTTP Method - GET  
+   Endpoint - /memes  
+   Error: If there are no memes available, an empty array shall be returned.  
 
