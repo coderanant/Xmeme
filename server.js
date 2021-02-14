@@ -2,6 +2,7 @@ require('./config/config');
 
 const _ = require('lodash');
 const express = require('express');
+const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const { ObjectID } = require('mongodb');
 
@@ -12,6 +13,26 @@ var app = express();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
+
+app.set('view engine', 'hbs');
+app.use(express.static(__dirname + '/views'));
+
+app.get('/', (req, res) => {
+    Meme.find().sort({ _id: -1 }).limit(100).then((doc) => {
+        var allMemes = "";
+        doc.forEach((i) => {
+            allMemes += `<div id = "${i._id}">
+            <img src = "${i.url}" width="300" height="300">
+            <h3>Submitted by : ${i.name}</h3>
+            <p>Caption : ${i.caption} </p>
+            </div>` 
+        });
+
+        res.render('home.hbs', {allMemes});
+    }).catch((e) => {
+        res.status(400).send(e);
+    });
+});
 
 app.post('/memes', (req, res) => {
     var meme = new Meme({

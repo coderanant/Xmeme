@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>
+        Some website
+    </title>
+</head>
+
+<body>
+    <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="memeName" name="name"> <br>
+        <label for="url">URL:</label><br>
+        <input type="text" id="url" name="url"><br>
+        <label for="caption">Caption:</label><br>
+        <input type="text" id="caption" name="caption"><br>
+        <input type="submit" id="submit" value="Submit">
+    </form>
+
+    <div class="memes">
+        <h1> Memes </h1>
+        <ul id="memeList">
+        </ul>
+    </div>
+</body>
+<script src="/js/getMemes.js"></script>
+<script src="/js/submitMeme.js"></script>
+</html>
