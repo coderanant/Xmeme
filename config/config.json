@@ -1,10 +1,10 @@
 {
     "test": {
-        "PORT": 8080,
+        "PORT": 8081,
         "MONGODB_URI": "mongodb://localhost:27017/XmemeTest"
     },
     "development": {
-        "PORT": 8080,
+        "PORT": 8081,
         "MONGODB_URI": "mongodb://localhost:27017/Xmeme"
     }
 }

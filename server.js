@@ -25,24 +25,33 @@ app.get('/', (req, res) => {
             <img src = "${i.url}" width="300" height="300">
             <h3>Submitted by : ${i.name}</h3>
             <p>Caption : ${i.caption} </p>
-            </div>` 
+            </div>`
         });
 
-        res.render('home.hbs', {allMemes});
+        res.render('home.hbs', { allMemes });
     }).catch((e) => {
         res.status(400).send(e);
     });
 });
 
 app.post('/memes', (req, res) => {
-    var meme = new Meme({
-        name: req.body.name,
-        url: req.body.url,
-        caption: req.body.caption
-    });
+    var name = req.body.name;
+    var url = req.body.url;
+    var caption = req.body.caption;
 
-    meme.save().then((doc) => {
-        res.send({ 'id': doc._id });
+    var meme = new Meme({ name, url, caption });
+
+    Meme.findOne({ name, url, caption }).then((doc) => {
+        console.log(doc);
+        if (doc) {
+            return res.status(409).send();
+        };
+    }).then(() => {
+        meme.save().then((doc) => {
+            return res.send({ 'id': doc._id });
+        }).catch((e) => {
+            Promise.reject();
+        });
     }).catch((e) => {
         res.status(400).send(e);
     });
@@ -100,8 +109,8 @@ app.patch('/memes/:id', (req, res) => {
 
     Meme.findOneAndUpdate({
         _id: id
-        }, {$set: body}, {new: true}).then((meme) => {
-        if(!meme) {
+    }, { $set: body }, { new: true }).then((meme) => {
+        if (!meme) {
             return res.status(404).send();
         }
 
