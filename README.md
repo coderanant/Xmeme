@@ -31,4 +31,10 @@ Note: The app uses Handlebars as rendering engine and no separate framework for 
    Endpoint - /memes/<id>  
    Error: If a meme with that Id doesn’t exist, a 404 HTTP response code should be returned.  
      
+3. Endpoint to update the caption or url for an existing meme at the backend  
+   HTTP Method - PATCH  
+   Endpoint - /memes/<id>  
+   Json Body can contain these inputs - url, caption  
+   The response will be just the HTTP status code  
+
 
