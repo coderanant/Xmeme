@@ -25,4 +25,10 @@ Note: The app uses Handlebars as rendering engine and no separate framework for 
    HTTP Method - GET  
    Endpoint - /memes  
    Error: If there are no memes available, an empty array shall be returned.  
+  
+2. Endpoint to specify a particular id (identifying the meme) to fetch a single Meme.  
+   HTTP Method - GET  
+   Endpoint - /memes/<id>  
+   Error: If a meme with that Id doesn’t exist, a 404 HTTP response code should be returned.  
+     
 
