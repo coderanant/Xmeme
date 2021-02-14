@@ -34,7 +34,7 @@ app.get('/memes', (req, res) => {
             memes.push({
                 'id': i._id,
                 'name': i.name,
-                'url': i.name,
+                'url': i.url,
                 'caption': i.caption
             });
         });
@@ -55,6 +55,32 @@ app.get('/memes/:id', (req, res) => {
         _id: id
     }).then((meme) => {
         if (!meme) {
+            return res.status(404).send();
+        }
+
+        res.send({
+            id: meme._id,
+            name: meme.name,
+            url: meme.url,
+            caption: meme.caption
+        });
+    }).catch((e) => {
+        res.status(400).send();
+    });
+});
+
+app.patch('/memes/:id', (req, res) => {
+    var id = req.params.id;
+    var body = _.pick(req.body, ['url', 'caption']);
+
+    if (!ObjectID.isValid(id)) {
+        return res.status(400).send();
+    }
+
+    Meme.findOneAndUpdate({
+        _id: id
+        }, {$set: body}, {new: true}).then((meme) => {
+        if(!meme) {
             return res.status(404).send();
         }
 
